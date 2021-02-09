@@ -7,7 +7,7 @@
 下面看一个使用类的例子：
 
 ```typescript
-/* 
+/*
 类的基本定义与使用
 */
 
@@ -16,12 +16,12 @@ class Greeter {
   message: string
 
   // 构造方法
-  constructor (message: string) {
+  constructor(message: string) {
     this.message = message
   }
 
   // 一般方法
-  greet (): string {
+  greet(): string {
     return 'Hello ' + this.message
   }
 }
@@ -36,7 +36,7 @@ console.log(greeter.greet())
 
 你会注意到，我们在引用任何一个类成员的时候都用了 `this`。 它表示我们访问的是类的成员。
 
-后面一行，我们使用 `new` 构造了 `Greeter` 类的一个实例。它会调用之前定义的构造函数，创建一个 `Greeter` 类型的新对象，并执行构造函数初始化它。  
+后面一行，我们使用 `new` 构造了 `Greeter` 类的一个实例。它会调用之前定义的构造函数，创建一个 `Greeter` 类型的新对象，并执行构造函数初始化它。
 
 最后一行通过 `greeter` 对象调用其 `greet` 方法
 
@@ -47,24 +47,24 @@ console.log(greeter.greet())
 看下面的例子：
 
 ```typescript
-/* 
+/*
 类的继承
 */
 
 class Animal {
-  run (distance: number) {
+  run(distance: number) {
     console.log(`Animal run ${distance}m`)
   }
 }
 
 class Dog extends Animal {
-  cry () {
+  cry() {
     console.log('wang! wang!')
   }
 }
 
 const dog = new Dog()
-dog.cry() 
+dog.cry()
 dog.run(100) // 可以调用从父中继承得到的方法
 ```
 
@@ -77,44 +77,43 @@ dog.run(100) // 可以调用从父中继承得到的方法
 ```typescript
 class Animal {
   name: string
-  
-  constructor (name: string) {
+
+  constructor(name: string) {
     this.name = name
   }
 
-  run (distance: number=0) {
+  run(distance: number = 0) {
     console.log(`${this.name} run ${distance}m`)
   }
-
 }
 
 class Snake extends Animal {
-  constructor (name: string) {
+  constructor(name: string) {
     // 调用父类型构造方法
     super(name)
   }
 
   // 重写父类型的方法
-  run (distance: number=5) {
+  run(distance: number = 5) {
     console.log('sliding...')
     super.run(distance)
   }
 }
 
 class Horse extends Animal {
-  constructor (name: string) {
+  constructor(name: string) {
     // 调用父类型构造方法
     super(name)
   }
 
   // 重写父类型的方法
-  run (distance: number=50) {
+  run(distance: number = 50) {
     console.log('dashing...')
     // 调用父类型的一般方法
     super.run(distance)
   }
 
-  xxx () {
+  xxx() {
     console.log('xxx()')
   }
 }
@@ -137,13 +136,13 @@ tom3.run()
 // tom2.run()
 ```
 
-这个例子展示了一些上面没有提到的特性。 这一次，我们使用 `extends` 关键字创建了 Animal的两个子类：`Horse` 和 `Snake`。
+这个例子展示了一些上面没有提到的特性。 这一次，我们使用 `extends` 关键字创建了 Animal 的两个子类：`Horse` 和 `Snake`。
 
 与前一个例子的不同点是，派生类包含了一个构造函数，它 必须调用 `super()`，它会执行基类的构造函数。 而且，在构造函数里访问 `this` 的属性之前，我们 一定要调用 `super()`。 这个是 TypeScript 强制执行的一条重要规则。
 
 这个例子演示了如何在子类里可以重写父类的方法。`Snake`类和 `Horse` 类都创建了 `run` 方法，它们重写了从 `Animal` 继承来的 `run` 方法，使得 `run` 方法根据不同的类而具有不同的功能。注意，即使 `tom` 被声明为 `Animal` 类型，但因为它的值是 `Horse`，调用 `tom.run(34)` 时，它会调用 `Horse` 里重写的方法。
 
-```
+```bash
 sliding...
 sn run 5m
 dashing...
@@ -160,14 +159,14 @@ ho run 50m
 
 ### 理解 private
 
-当成员被标记成 `private` 时，它就不能在声明它的类的外部访问。  
+当成员被标记成 `private` 时，它就不能在声明它的类的外部访问。
 
 ### 理解 protected
 
 `protected` 修饰符与 `private` 修饰符的行为很相似，但有一点不同，`protected`成员在派生类中仍然可以访问。例如：
 
 ```typescript
-/* 
+/*
 访问修饰符: 用来描述类内部的属性/方法的可访问性
   public: 默认值, 公开的外部也可以访问
   private: 只能类内部可以访问
@@ -177,11 +176,11 @@ ho run 50m
 class Animal {
   public name: string
 
-  public constructor (name: string) {
+  public constructor(name: string) {
     this.name = name
   }
 
-  public run (distance: number=0) {
+  public run(distance: number = 0) {
     console.log(`${this.name} run ${distance}m`)
   }
 }
@@ -190,14 +189,14 @@ class Person extends Animal {
   private age: number = 18
   protected sex: string = '男'
 
-  run (distance: number=5) {
+  run(distance: number = 5) {
     console.log('Person jumping...')
     super.run(distance)
   }
 }
 
 class Student extends Person {
-  run (distance: number=6) {
+  run(distance: number = 6) {
     console.log('Student jumping...')
 
     console.log(this.sex) // 子类能看到父类中受保护的成员
@@ -234,8 +233,7 @@ let john = new Person('John')
 
 ```typescript
 class Person2 {
-  constructor(readonly name: string) {
-  }
+  constructor(readonly name: string) {}
 }
 
 const p = new Person2('jack')
@@ -256,10 +254,10 @@ console.log(p.name)
 class Person {
   firstName: string = 'A'
   lastName: string = 'B'
-  get fullName () {
+  get fullName() {
     return this.firstName + '-' + this.lastName
   }
-  set fullName (value) {
+  set fullName(value) {
     const names = value.split('-')
     this.firstName = names[0]
     this.lastName = names[1]
@@ -270,7 +268,7 @@ const p = new Person()
 console.log(p.fullName)
 
 p.firstName = 'C'
-p.lastName =  'D'
+p.lastName = 'D'
 console.log(p.fullName)
 
 p.fullName = 'E-F'
@@ -282,7 +280,7 @@ console.log(p.firstName, p.lastName)
 到目前为止，我们只讨论了类的实例成员，那些仅当类被实例化的时候才会被初始化的属性。 我们也可以创建类的静态成员，这些属性存在于类本身上面而不是类的实例上。 在这个例子里，我们使用 `static` 定义 `origin`，因为它是所有网格都会用到的属性。 每个实例想要访问这个属性的时候，都要在 `origin` 前面加上类名。 如同在实例属性上使用 `this.xxx` 来访问属性一样，这里我们使用 `Grid.xxx` 来访问静态属性。
 
 ```typescript
-/* 
+/*
 静态属性, 是类对象的属性
 非静态属性, 是类的实例对象的属性
 */
@@ -301,23 +299,22 @@ console.log(new Person().name1)
 抽象类做为其它派生类的基类使用。 它们不能被实例化。不同于接口，抽象类可以包含成员的实现细节。 `abstract` 关键字是用于定义抽象类和在抽象类内部定义抽象方法。
 
 ```typescript
-/* 
+/*
 抽象类
   不能创建实例对象, 只有实现类才能创建实例
   可以包含未实现的抽象方法
 */
 
 abstract class Animal {
+  abstract cry()
 
-  abstract cry ()
-
-  run () {
+  run() {
     console.log('run()')
   }
 }
 
 class Dog extends Animal {
-  cry () {
+  cry() {
     console.log(' Dog cry()')
   }
 }

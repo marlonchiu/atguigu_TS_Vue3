@@ -4,21 +4,21 @@ TypeScript 支持与 JavaScript 几乎相同的数据类型，此外还提供了
 
 ## 布尔值
 
-最基本的数据类型就是简单的 true/false 值，在JavaScript 和 TypeScript 里叫做 `boolean`（其它语言中也一样）。
+最基本的数据类型就是简单的 true/false 值，在 JavaScript 和 TypeScript 里叫做 `boolean`（其它语言中也一样）。
 
 ```typescript
-let isDone: boolean = false;
-isDone = true;
+let isDone: boolean = false
+isDone = true
 // isDone = 2 // error
 ```
 
 ## 数字
 
-和 JavaScript 一样，TypeScript 里的所有数字都是浮点数。 这些浮点数的类型是 number。 除了支持十进制和十六进制字面量，TypeScript 还支持 ECMAScript 2015中引入的二进制和八进制字面量。
+和 JavaScript 一样，TypeScript 里的所有数字都是浮点数。 这些浮点数的类型是 number。 除了支持十进制和十六进制字面量，TypeScript 还支持 ECMAScript 2015 中引入的二进制和八进制字面量。
 
 ```typescript
 let a1: number = 10 // 十进制
-let a2: number = 0b1010  // 二进制
+let a2: number = 0b1010 // 二进制
 let a3: number = 0o12 // 八进制
 let a4: number = 0xa // 十六进制
 ```
@@ -28,10 +28,10 @@ let a4: number = 0xa // 十六进制
 JavaScript 程序的另一项基本操作是处理网页或服务器端的文本数据。 像其它语言里一样，我们使用 `string` 表示文本数据类型。 和 JavaScript 一样，可以使用双引号（`"`）或单引号（`'`）表示字符串。
 
 ```typescript
-let name:string = 'tom'
+let name: string = 'tom'
 name = 'jack'
 // name = 12 // error
-let age:number = 12
+let age: number = 12
 const info = `My name is ${name}, I am ${age} years old!`
 ```
 
@@ -45,7 +45,6 @@ let n: null = null
 ```
 
 默认情况下 `null` 和 `undefined` 是所有类型的子类型。 就是说你可以把 `null` 和 `undefined` 赋值给 `number` 类型的变量。
-
 
 ## 数组
 
@@ -91,31 +90,43 @@ enum Color {
 
 // 枚举数值默认从0开始依次递增
 // 根据特定的名称得到对应的枚举数值
-let myColor: Color = Color.Green  // 0
+let myColor: Color = Color.Green // 0
 console.log(myColor, Color.Red, Color.Blue)
 ```
 
 默认情况下，从 `0` 开始为元素编号。 你也可以手动的指定成员的数值。 例如，我们将上面的例子改成从 `1` 开始编号：
 
 ```typescript
-enum Color {Red = 1, Green, Blue}
+enum Color {
+  Red = 1,
+  Green,
+  Blue
+}
 let c: Color = Color.Green
 ```
 
 或者，全部都采用手动赋值：
 
 ```typescript
-enum Color {Red = 1, Green = 2, Blue = 4}
+enum Color {
+  Red = 1,
+  Green = 2,
+  Blue = 4
+}
 let c: Color = Color.Green
 ```
 
 枚举类型提供的一个便利是你可以由枚举的值得到它的名字。 例如，我们知道数值为 2，但是不确定它映射到 Color 里的哪个名字，我们可以查找相应的名字：
 
 ```typescript
-enum Color {Red = 1, Green, Blue}
+enum Color {
+  Red = 1,
+  Green,
+  Blue
+}
 let colorName: string = Color[2]
 
-console.log(colorName)  // 'Green'
+console.log(colorName) // 'Green'
 ```
 
 ## any
@@ -163,7 +174,7 @@ let unusable: void = undefined
 使用 `object` 类型，就可以更好的表示像 `Object.create` 这样的 `API`。例如：
 
 ```typescript
-function fn2(obj:object):object {
+function fn2(obj: object): object {
   console.log('fn2()', obj)
   return {}
   // return undefined
@@ -176,23 +187,23 @@ console.log(fn2(String))
 
 ## 联合类型
 
-联合类型（Union Types）表示取值可以为多种类型中的一种  
-需求1: 定义一个一个函数得到一个数字或字符串值的字符串形式值
+联合类型（Union Types）表示取值可以为多种类型中的一种
+需求 1: 定义一个一个函数得到一个数字或字符串值的字符串形式值
 
 ```typescript
-function toString2(x: number | string) : string {
+function toString2(x: number | string): string {
   return x.toString()
 }
 ```
 
-需求2: 定义一个一个函数得到一个数字或字符串值的长度
+需求 2: 定义一个一个函数得到一个数字或字符串值的长度
 
 ```typescript
 function getLength(x: number | string) {
-
   // return x.length // error
 
-  if (x.length) { // error
+  if (x.length) {
+    // error
     return x.length
   } else {
     return x.toString().length
@@ -207,7 +218,7 @@ function getLength(x: number | string) {
 类型断言有两种形式。 其一是“尖括号”语法, 另一个为 `as` 语法
 
 ```typescript
-/* 
+/*
 类型断言(Type Assertion): 可以用来手动指定一个值的类型
 语法:
     方式一: <类型>值
@@ -227,8 +238,8 @@ console.log(getLength('abcd'), getLength(1234))
 
 ## 类型推断
 
-类型推断: TS会在没有明确的指定类型的时候推测出一个类型  
-有下面2种情况: 1. 定义变量时赋值了, 推断为对应的类型. 2. 定义变量时没有赋值, 推断为any类型
+类型推断: TS 会在没有明确的指定类型的时候推测出一个类型
+有下面 2 种情况: 1. 定义变量时赋值了, 推断为对应的类型. 2. 定义变量时没有赋值, 推断为 any 类型
 
 ```typescript
 /* 定义变量时赋值了, 推断为对应的类型 */
@@ -236,8 +247,7 @@ let b9 = 123 // number
 // b9 = 'abc' // error
 
 /* 定义变量时没有赋值, 推断为any类型 */
-let b10  // any类型
+let b10 // any类型
 b10 = 123
 b10 = 'abc'
 ```
-
